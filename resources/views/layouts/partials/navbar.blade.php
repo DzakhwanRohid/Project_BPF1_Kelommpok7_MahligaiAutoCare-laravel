@@ -15,7 +15,7 @@
                 <a href="{{ route('layanan') }}" class="nav-item nav-link {{ request()->routeIs('layanan') ? 'active' : '' }}">Layanan</a>
                 <a href="{{ route('kontak') }}" class="nav-item nav-link {{ request()->routeIs('kontak') ? 'active' : '' }}">Kontak</a>
             </div>
-            <a href="#" class="btn btn-cta rounded-pill text-white py-2 px-4 d-none d-lg-block">Pantau Antrian</a>
+             <a href="{{ route('pantau.antrian') }}" class="btn btn-cta rounded-pill text-white py-2 px-4 d-none d-lg-block">Pantau Antrian</a>
         </div>
     </div>
 </nav>

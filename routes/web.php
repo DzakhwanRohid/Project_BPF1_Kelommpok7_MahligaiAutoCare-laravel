@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\layananController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 // Web Routes
@@ -33,10 +37,35 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('role:admin')
         ->name('admin.dashboard');
 
+    Route::get('/admin/transaksi', [TransactionController::class, 'index'])
+        ->middleware('role:admin')
+        ->name('admin.transaksi');
+
+    Route::get('/admin/laporan', [ReportController::class, 'index'])
+        ->middleware('role:admin')
+        ->name('admin.laporan');
+
+    Route::get('/admin/users',[UserController::class, 'index'])
+        ->middleware('role:admin')
+        ->name('admin.users.index');
+
+    Route::get('admin/layanan',[layananController::class,'index'])
+        ->middleware('role:admin')
+        ->name('admin.layanan.index');
+
     Route::get('/kasir/dashboard', [DashboardController::class, 'kasir'])
         ->middleware('role:kasir')
         ->name('kasir.dashboard');
+
+    Route::get('/kasir/transaksi',[TransactionController::class,'kasirIndex'])
+        ->middleware('role:kasir')
+        ->name('kasir.transaksi');
 });
+
+// Route Pantau Antrian
+Route::get('/pantau-antrian', function () {
+    return view('pantau-antrian');
+})->name('pantau.antrian');
 
 // Memuat semua rute autentikasi (login, register, logout, dll.) dari Breeze
 require __DIR__.'/auth.php';
